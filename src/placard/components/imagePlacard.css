@@ -1,0 +1,77 @@
+.placard {
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    font-family: arial,sans-serif;
+}
+
+a.placardLabel {
+    text-decoration: none;
+    color: #222;    
+}
+
+a.placardLabel:hover {
+    text-decoration: underline;
+    color: #000;    
+}
+
+a.placardHitCount {
+    font-size: smaller;
+    font-weight: normal;
+    color: #777;
+    text-decoration: none;
+}
+
+a.placardHitCount:hover {
+    font-size: smaller;
+    font-weight: normal;
+    color: #555;
+    text-decoration: underline;
+}
+
+.placardImage {
+    object-fit: cover;
+    margin: 0px auto;
+    height: 100px;
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.placardDiv {
+    margin: 10px;
+    display: inline-table;
+    width: 100px;
+    text-align: left;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);
+    border-radius: 2px;
+    padding: 4px;
+    overflow: hidden;
+}
+.recordsDiv {
+    clear:both;
+    overflow: hidden;
+    height: auto;
+}
+
+.placardHitCountContainer {
+    float: right;
+    margin-right: 20px;
+}
+
+.placardLabelContainer {
+    float: left;
+}
+
+.placardHeading {
+    width: 100%;
+    margin: 0px 10px;
+}
+
+a.itemLink {
+    text-decoration: none;
+    font-size: smaller;
+}
+
+a.itemLink:hover {
+    text-decoration: underline;
+}

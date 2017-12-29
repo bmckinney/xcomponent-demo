@@ -1,96 +1,60 @@
-xcomponent demo
+EBSCO xcomponent library
 ---------------
 
-A forkable demo repo for [xcomponent](https://github.com/krakenjs/xcomponent) to help you get started.
+A component library that allows you to inject EBSCO react components into any web page.
 
-[xcomponent](https://github.com/krakenjs/xcomponent) is a cross-domain component library which helps you render iframes and popups, pass down props, accept callbacks, and much more. This repo sets you up with the best possible starting point for building an xcomponent, including:
+It uses PayPal's [xcomponent](https://github.com/krakenjs/xcomponent) - a cross-domain component 
+library which helps you render iframes, pass down props, accept callbacks, and more. 
 
-- Predefined webpack, babel, karma etc. configs for working with xcomponent
-- Predefined test-setup, including a mock component frame
-- Predefined demo pages for both iframe and popup components
 
-### Useful starting points
-
-- [Component definition](./src/login/component.jsx)
-- [Demo in iframe mode](./demo/iframe/index.htm)
-- [Demo in popup mode](./demo/popup/index.htm)
-- [Component test](./test/tests/login.js)
-
-Quick Start
+Adding a new React component
 -----------
 
-#### Getting Started
+1. Add the new React component files to the `/src` directory
 
-- Fork the module
-- Install: `npm install`
-- Start editing code in `./src` and writing tests in `./tests`
-- Build: `npm run build`
+2. Add any new dependencies via `npm install -S my-new-library`
 
-#### Building
+3. Create the **component definition** (js or jsx)
 
-```bash
-npm run build
-```
+   This is shared between the parent page and the child frame and mirrors the props required by the new component. 
 
-#### Running Demo Server
+   Use `./src/placard/xcomponents/placardXComponent.jsx` as a template.
 
-```bash
-npm run demo
-```
+4. Create the **component implementation**  (html)
 
-#### Deploying
+   This is the code that lives inside the child frame, and makes the component work. It has access to all of the props passed down to the component, and it's responsible for calling the correct callbacks when it’s done. Essentially, the entire web-app inside the iframe functions as a component.
 
-- Host your bundled xcomponent script somewhere, e.g. `https://mysite.com/login.xcomponent.js`
-- Set up a public url for your component, e.g. `https://mysite.com/login`
-- Make sure the `login.xcomponent.js` is included in the login page, and using `window.xprops`
+   Use `./src/placard/xcomponents/placard.html` as a template.
+   
+5. Create the **component integration** (html)
 
-Now other sites can include `https://mysite.com/login.xcomponent.js` on their pages, and render your component!
+   This is a demo html page that renders the component, passing down all of the props the component needs to function.
 
-#### Tests
+   Use `./demo/placard/index.html` as a template. Be sure to set: `env: 'demo'`
+   
+   Add a copy of the component implementation to the demo as well as any necessary css files.
 
-- Edit tests in `./test/tests`
-- Run the tests:
+6. Rebuild the project
 
-  ```bash
-  npm run test
-  ```
+   ```bash
+   npm run clean
+   npm run build
+   ```
+   
+7. Run the demo and test your component locally before deploying
 
-#### Testing with different/multiple browsers
+   ```bash
+   npm run demo
+   ```
 
-```bash
-npm run karma -- --browser=PhantomJS
-npm run karma -- --browser=Chrome
-npm run karma -- --browser=Safari
-npm run karma -- --browser=Firefox
-npm run karma -- --browser=PhantomJS,Chrome,Safari,Firefox
-```
+Deploying
+-----------
 
-#### Keeping the browser open after tests
+After running `npm run build`, a single, distributable javascript library package is produced at `dist/xcomponent-library.frame.js`
 
-```bash
-npm run karma -- --keep-open
-```
+Copy this file, along with any new component implementation html and any css to `deploy-static`.
 
-#### Publishing
+Host the files contained in `deploy-static` on any web server or CDN. A node.js server is not required.
 
-##### Before you publish for the first time:
-
-- Remove the example code in `./src`, `./test/tests` and `./demo`
-- Edit the module name in `package.json`
-- Edit `README.md` and `CONTRIBUTING.md`
-
-##### Then:
-
-- Publish your code: `npm run release` to build and publish a patch version
-- Or `npm run release:patch`, `npm run release:minor`, `npm run release:major`
-
-Notes
------
-
-- `webpack.config.js` is set up to build both `iframe` and `popup` versions of your component. Normally this will be overkill and you'll just want to pick one. The reason there's an example of both is, the popup rendering code adds more to the bundle size, so cutting this out can streamline your bundle if you only need iframe support.
-
-- The karma tests use a mock for the component window (i.e. everything displayed in the popup window or iframe window). This can be seen [here](./test/windows/login). When writing tests which need to consume `window.xprops` and call callbacks like `window.xprops.onLogin()`, you'll need to do that here.
-
-- This module imports from `xcomponent/src` rather than `xcomponent/dist`, allowing your build to take advantage of tree-shaking, flow-types, etc. from `xcomponent` and all of its dependencies. That means that various babel plugins etc. that are required by `xcomponent` and its dependencies are included in this module. If this isn't to your liking, you're free to switch to `xcomponent/dist`, but be warned that you will lose out on some benefits this way. It will reduce the build time though.
-
-- This module is forked from [grumbler](https://github.com/krakenjs/grumbler), which gives a solid (but opinionated) default setup for front-end javascript libraries, including webpack, karma, babel, flowtype, etc. You're free to switch out any of these technologies, but the existing setup is likely to give the best compatibility especially given the previous note around importing from `xcomponent/src`.
+Now other sites, like EDS bottom-branding, can include `https://ebsco-xcomponents.com/xcomponent-library.frame.js` 
+on their pages, and render the components.

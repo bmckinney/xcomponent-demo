@@ -1,4 +1,3 @@
-/* @flow */
 /* eslint import/no-nodejs-modules: off */
 
 import path from 'path';
@@ -8,8 +7,8 @@ import webpack from 'webpack';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 
-const FILE_NAME = 'xcomponent-demo';
-const MODULE_NAME = 'xclogin';
+const FILE_NAME = 'xcomponent-library';
+const MODULE_NAME = 'ebsco';
 
 const DEFAULT_VARS = {
     __TEST__:                           false,
@@ -138,27 +137,27 @@ export let WEBPACK_CONFIG_FRAME_MIN = getWebpackConfig({
     }
 });
 
-export let WEBPACK_CONFIG_POPUP = getWebpackConfig({
-    filename:   `${ FILE_NAME }.popup.js`,
-    modulename: MODULE_NAME,
-    vars:       {
-        __DEFAULT_CONTEXT__:  'popup',
-        __POPUP_SUPPORT__:    true,
-        __IE_POPUP_SUPPORT__: true
-    }
-});
-
-export let WEBPACK_CONFIG_POPUP_MIN = getWebpackConfig({
-    filename:   `${ FILE_NAME }.popup.min.js`,
-    modulename: MODULE_NAME,
-    minify:     true,
-    vars:       {
-        __DEFAULT_CONTEXT__:  'popup',
-        __POPUP_SUPPORT__:    true,
-        __IE_POPUP_SUPPORT__: true,
-        __MIN__:              true
-    }
-});
+// export let WEBPACK_CONFIG_POPUP = getWebpackConfig({
+//     filename:   `${ FILE_NAME }.popup.js`,
+//     modulename: MODULE_NAME,
+//     vars:       {
+//         __DEFAULT_CONTEXT__:  'popup',
+//         __POPUP_SUPPORT__:    true,
+//         __IE_POPUP_SUPPORT__: true
+//     }
+// });
+//
+// export let WEBPACK_CONFIG_POPUP_MIN = getWebpackConfig({
+//     filename:   `${ FILE_NAME }.popup.min.js`,
+//     modulename: MODULE_NAME,
+//     minify:     true,
+//     vars:       {
+//         __DEFAULT_CONTEXT__:  'popup',
+//         __POPUP_SUPPORT__:    true,
+//         __IE_POPUP_SUPPORT__: true,
+//         __MIN__:              true
+//     }
+// });
 
 export let WEBPACK_CONFIG_TEST = getWebpackConfig({
     filename:   `${ FILE_NAME }.js`,
@@ -173,7 +172,7 @@ export let WEBPACK_CONFIG_TEST = getWebpackConfig({
 
 export default [
     WEBPACK_CONFIG_FRAME,
-    WEBPACK_CONFIG_FRAME_MIN,
-    WEBPACK_CONFIG_POPUP,
-    WEBPACK_CONFIG_POPUP_MIN
+    WEBPACK_CONFIG_FRAME_MIN
+    // WEBPACK_CONFIG_POPUP,
+    // WEBPACK_CONFIG_POPUP_MIN
 ];

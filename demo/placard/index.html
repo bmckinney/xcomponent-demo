@@ -1,0 +1,18 @@
+
+<head>
+    <script src="../../dist/xcomponent-library.frame.js"></script>
+</head>
+<body>
+    <h3>Placard</h3>
+    <div id="placard"></div>
+    <script>
+        var query = 'harry potter';
+         ebsco.PlacardXComponent.render({
+            env: 'demo',
+            query: query,
+            count: '5',
+            label: 'Find More through your Other Libraries',
+            source: '//gss.ebscohost.com/efrierson/scripts/react-worldcat.php?searchterm={SEARCHTERM}&cformat=mla&images=Y&count={COUNT}&subdomain=&wskey=UG4ydHI1dTI4TGlNTkhlZmlWcEtudDRZVVQ4TzZxemROV2tkbmNkd0QxTEtLb1dSUlpDdXg0bGROWGhFQlNHbUQ5Z0xJcHI4U1MzT3dFNUk%3D'
+        }, '#placard');
+    </script>
+</body>
